@@ -18,8 +18,8 @@ import java.util.ArrayList;
  */
 public class MoviesAdapter extends ArrayAdapter<Movie> {
 
-    public MoviesAdapter(Context context, ArrayList<Movie> movies) {
-        super(context, R.layout.item_movie, movies);
+    public MoviesAdapter(Context context , ArrayList<Movie> movies){
+        super(context, android.R.layout.simple_list_item_1, movies);
     }
 
     @Override
@@ -32,17 +32,47 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
         }
         // Lookup view for data population
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+        TextView tvDescription = (TextView) convertView.findViewById(R.id.tvOverview);
         ImageView ivPoster = (ImageView) convertView.findViewById(R.id.ivPoster);
+        ivPoster.setImageResource(0);
         // Populate the data into the template view using the data object
-        tvTitle.setText(movie.title);
+        tvTitle.setText(movie.getTitle());
+        tvDescription.setText(movie.getDescription());
 
         Log.d("MoviesAdapter", "Position: " + position);
 
-        String imageUri = "https://i.imgur.com/tGbaZCY.jpg";
-        Picasso.with(getContext()).load(imageUri).into(ivPoster);
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivPoster);
 
         //ivPoster.set
         // Return the completed view to render on screen
         return convertView;
     }
+
+    //    public MoviesAdapter(Context context, ArrayList<Movie> movies) {
+//        super(context, R.layout.item_movie2, movies);
+//    }
+//
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        // Get the data item for this position
+//        Movie movie = getItem(position);
+//        // Check if an existing view is being reused, otherwise inflate the view
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_movie2, parent, false);
+//        }
+//        // Lookup view for data population
+//        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+//        ImageView ivPoster = (ImageView) convertView.findViewById(R.id.ivPoster);
+//        // Populate the data into the template view using the data object
+//        tvTitle.setText(movie.title);
+//
+//        Log.d("MoviesAdapter", "Position: " + position);
+//
+//        String imageUri = "https://i.imgur.com/tGbaZCY.jpg";
+//        Picasso.with(getContext()).load(imageUri).into(ivPoster);
+//
+//        //ivPoster.set
+//        // Return the completed view to render on screen
+//        return convertView;
+//    }
 }
