@@ -35,6 +35,7 @@ public class Movie {
 //        return title + " - " + rating;
 //    }
     public String posterPath;
+    public String landscapePath;
     public String title;
     public String description;
 
@@ -42,6 +43,7 @@ public class Movie {
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("original_title");
         description = jsonObject.getString("overview");
+        landscapePath =  jsonObject.getString("backdrop_path");
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray array) throws JSONException {
@@ -64,4 +66,7 @@ public class Movie {
         return description;
     }
 
+    public String getLandscapePath() {
+        return String.format("http://image.tmdb.org/t/p/w780/%s", landscapePath);
+    }
 }

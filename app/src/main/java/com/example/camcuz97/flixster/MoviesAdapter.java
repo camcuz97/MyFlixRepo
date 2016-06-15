@@ -1,6 +1,7 @@
 package com.example.camcuz97.flixster;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,13 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
 
         Log.d("MoviesAdapter", "Position: " + position);
 
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivPoster);
+        boolean isLandscape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        if(isLandscape){
+            Picasso.with(getContext()).load(movie.getLandscapePath()).into(ivPoster);
+        }else{
+            Picasso.with(getContext()).load(movie.getPosterPath()).into(ivPoster);
+        }
+
 
         //ivPoster.set
         // Return the completed view to render on screen
