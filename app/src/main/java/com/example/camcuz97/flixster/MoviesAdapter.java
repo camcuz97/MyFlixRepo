@@ -44,12 +44,10 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
 
         boolean isLandscape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if(isLandscape){
-            Picasso.with(getContext()).load(movie.getLandscapePath()).into(ivPoster);
+            Picasso.with(getContext()).load(movie.getLandscapePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(ivPoster);
         }else{
-            Picasso.with(getContext()).load(movie.getPosterPath()).into(ivPoster);
+            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.drawable.loading).error(R.drawable.error).into(ivPoster);
         }
-
-
         //ivPoster.set
         // Return the completed view to render on screen
         return convertView;
