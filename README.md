@@ -56,7 +56,7 @@ The thing I struggled with the most in regards to this app was linking the movie
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [Cameron Cuzmanko]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
