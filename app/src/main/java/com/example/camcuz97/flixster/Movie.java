@@ -38,12 +38,18 @@ public class Movie {
     public String landscapePath;
     public String title;
     public String description;
+    public double rating;
+    public int numVotes;
+    public String date;
 
     public Movie(JSONObject jsonObject) throws JSONException {
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("original_title");
         description = jsonObject.getString("overview");
         landscapePath =  jsonObject.getString("backdrop_path");
+        rating = jsonObject.getDouble("vote_average");
+        date = jsonObject.getString("release_date");
+
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray array) throws JSONException {
@@ -68,5 +74,17 @@ public class Movie {
 
     public String getLandscapePath() {
         return String.format("http://image.tmdb.org/t/p/w780/%s", landscapePath);
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public int getNumVotes() {
+        return numVotes;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

@@ -19,6 +19,12 @@ import java.util.ArrayList;
  */
 public class MoviesAdapter extends ArrayAdapter<Movie> {
 
+    private static class ViewHolder{
+        TextView name;
+        TextView description;
+        ImageView img;
+    }
+
     public MoviesAdapter(Context context , ArrayList<Movie> movies){
         super(context, android.R.layout.simple_list_item_1, movies);
     }
@@ -28,25 +34,37 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
         // Get the data item for this position
         Movie movie = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
+        ViewHolder viewHolder;
         if (convertView == null) {
+            viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_movie, parent, false);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.description = (TextView) convertView.findViewById(R.id.tvOverview);
+            viewHolder.img = (ImageView) convertView.findViewById(R.id.ivPoster);
+            convertView.setTag(viewHolder);
         }
+        else{
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.name.setText(movie.getTitle());
+        viewHolder.description.setText(movie.getDescription());
+        viewHolder.img.setImageResource(0);
         // Lookup view for data population
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvDescription = (TextView) convertView.findViewById(R.id.tvOverview);
-        ImageView ivPoster = (ImageView) convertView.findViewById(R.id.ivPoster);
-        ivPoster.setImageResource(0);
+        //TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+        //TextView tvDescription = (TextView) convertView.findViewById(R.id.tvOverview);
+        //ImageView ivPoster = (ImageView) convertView.findViewById(R.id.ivPoster);
+        //ivPoster.setImageResource(0);
         // Populate the data into the template view using the data object
-        tvTitle.setText(movie.getTitle());
-        tvDescription.setText(movie.getDescription());
+        //tvTitle.setText(movie.getTitle());
+        //tvDescription.setText(movie.getDescription());
 
         Log.d("MoviesAdapter", "Position: " + position);
 
         boolean isLandscape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if(isLandscape){
-            Picasso.with(getContext()).load(movie.getLandscapePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(ivPoster);
+            Picasso.with(getContext()).load(movie.getLandscapePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(viewHolder.img);
         }else{
-            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.drawable.loading).error(R.drawable.error).into(ivPoster);
+            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.drawable.loading).error(R.drawable.error).into(viewHolder.img);
         }
         //ivPoster.set
         // Return the completed view to render on screen

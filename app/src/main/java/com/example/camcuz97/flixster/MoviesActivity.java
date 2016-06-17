@@ -1,8 +1,11 @@
 package com.example.camcuz97.flixster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MoviesActivity extends AppCompatActivity {
+public class MoviesActivity extends AppCompatActivity  {
     ArrayList<Movie> movies;
     MoviesAdapter movieAdapter;
     ListView lvItems;
@@ -31,6 +34,7 @@ public class MoviesActivity extends AppCompatActivity {
 
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
         AsyncHttpClient client = new AsyncHttpClient();
+        setupListViewListener();
         client.get(url, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -51,6 +55,7 @@ public class MoviesActivity extends AppCompatActivity {
             }
         });
 
+
 //        //1. Get the actual movies
 //        ArrayList<Movie> movies = Movie.getFakeMovies();
 //
@@ -67,5 +72,27 @@ public class MoviesActivity extends AppCompatActivity {
 //            lvMovies.setAdapter(adapter);
 //        }
 
+
+    }
+
+
+    private void setupListViewListener() {
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View item, int pos, long id) {
+                Log.i("HelloListView", "You clicked: " + id + " at position " + pos);
+                Intent i =  new Intent();
+                i.setClass(MoviesActivity.this, InfoActivity.class);
+                Movie mov = movies.get(pos);
+                i.putExtra("title", mov.getTitle());
+                i.putExtra("description", mov.getDescription());
+                i.putExtra("rating", mov.getRating());
+                i.putExtra("votes", mov.getNumVotes());
+                i.putExtra("date", mov.getDate());
+                i.putExtra("backdrop", mov.getLandscapePath());
+                Log.i("ByeListView","Put everything");
+                startActivity(i);
+            }
+        });
     }
 }
