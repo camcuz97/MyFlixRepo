@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 /**
  * Created by camcuz97 on 6/15/16.
  */
@@ -62,9 +64,9 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
 
         boolean isLandscape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if(isLandscape){
-            Picasso.with(getContext()).load(movie.getLandscapePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(viewHolder.img);
+            Picasso.with(getContext()).load(movie.getLandscapePath()).placeholder(R.drawable.loading).error(R.drawable.error).transform(new RoundedCornersTransformation(10, 10)).into(viewHolder.img);
         }else{
-            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.drawable.loading).error(R.drawable.error).into(viewHolder.img);
+            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.drawable.loading).error(R.drawable.error).transform(new RoundedCornersTransformation(10, 10)).into(viewHolder.img);
         }
         //ivPoster.set
         // Return the completed view to render on screen

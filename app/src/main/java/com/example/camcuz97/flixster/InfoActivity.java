@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class InfoActivity extends AppCompatActivity {
     RatingBar ratingBar;
     TextView tvTitle;
@@ -37,7 +39,7 @@ public class InfoActivity extends AppCompatActivity {
         tvRate.setText("" + rating/2 + "/5");
         tvDate.setText("Release Date: " + date);
         ratingBar.setRating((float)rating/2);
-        Picasso.with(this.getApplicationContext()).load(back).placeholder(R.drawable.loading).error(R.drawable.error).into(ivBack);
+        Picasso.with(this.getApplicationContext()).load(back).placeholder(R.drawable.loading).error(R.drawable.error).transform(new RoundedCornersTransformation(10, 10)).into(ivBack);
 
     }
 }
