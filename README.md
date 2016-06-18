@@ -47,7 +47,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-The thing I struggled with the most in regards to this app was linking the movie info activity to the main activity. Whenever I clicked a ListView item, I was getting a fatal error. Eventually, I solved the issue. I never got around to finishing swipe to refresh (I moved on to other parts). If I had the time, I would like go back and finish that. I'm very happy with the progress I made on this app.
+The thing I struggled with the most in regards to this app was linking the movie info activity to the main activity. Whenever I clicked a ListView item, I was getting a fatal error. Eventually, I solved the issue. I never got around to finishing swipe to refresh (I moved on to other parts). If I had the time, I would go back and finish that. I'm very happy with the progress I made on this app. After it is due, I may still continue to implement the youtubeAPI and butterknife to improve the app further. I also may toy with the look of the app as well.
 
 ## Open-source libraries used
 
